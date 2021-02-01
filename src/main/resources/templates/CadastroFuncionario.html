@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+	
+<head><meta charset="UTF-8"/></head>	
+	
+<section layout:fragment="conteudo">
+
+<div class="container-lg">
+		<div th:replace="MensagemGeral"></div>
+		
+		<div class="card shadow-lg mb-4">
+			<div class="card-header py-4">
+				<h5 class="m-0 font-weight-bold text-primary text-center title-panel">Cadastro de Funcionário</h5>
+				<a class="btn btn-secondary btn-sm link-panel " href="/wa/funcionarios">Voltar para pesquisa</a>
+			</div>
+			<div class="card-body">
+
+				<!-- --------------------------------------Form----------------------------------------- -->
+				<form method="POST" action="/wa/funcionarios/cadastrar" th:object="${funcionario}">		
+					<input type="hidden" th:field="*{id}"/>
+					  
+					<div th:replace="MensagemErro"></div>
+	
+					  <div class="form-row">
+					    <div class="form-group col-md-6">
+					      <label for="nome">Nome completo</label>
+					      <input type="text" class="form-control" id="nome" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? alert-danger">
+					    </div>
+					    <div class="form-group col-md-2">
+					      <label for="matricula">Matrícula</label>
+					      <input type="text" class="form-control" id="matricula" th:field="*{matricula}" th:classappend="${#fields.hasErrors('matricula')} ? alert-danger">
+					    </div>
+						<div class="form-group col-md-4">
+					      <label for="cargo">Cargo</label>
+					      	<select id="cargo" class="form-control" th:field="*{cargo}">
+								<option th:each="cargos : ${todosCargos}" th:value="${cargos}" th:text="${cargos.descricao}"></option>
+							</select>
+					    </div>
+					  </div>					
+					
+ 					  <div class="form-row">
+					    <div class="form-group col-md-6"> 
+					      <label for="inicio_wa">Data início WA</label> 
+					      <input class="form-control" id="inicio_wa" th:field="*{inicio_wa}" th:classappend="${#fields.hasErrors('inicio_wa')} ? alert-danger"
+								data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+								data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+					    </div>
+					    <div class="form-group col-md-6">
+					      <label for="termino_wa">Data término WA</label> 
+					      <input class="form-control" id="termino_wa" th:field="*{termino_wa}" th:classappend="${#fields.hasErrors('termino_wa')} ? alert-danger"
+								data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+								data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+					    </div>
+					  </div> 
+					  
+					  <div class="form-row">
+					  	<div class="form-group col-md-6"> 
+						  	<label for="localTrabalho">Unidade GFT</label>
+						      	<select id="localTrabalho" class="form-control" th:field="*{localTrabalho}">
+									<option th:each="localTrabalho : ${todosLocaisTrabalho}" th:value="${localTrabalho.id}" th:text="${localTrabalho.nome}"></option>
+								</select>
+						</div>
+						<div class="form-group col-md-6"> 
+							<label for="Tecnologias">Tecnologias</label>
+							  <select id="Tecnologias" th:field="*{tecnologias}" class="selectpicker form-control" multiple 
+							  data-live-search="true" title="Selecione as Tecnologias" data-icon-base="devicon">
+							    <option th:each="tecnologia : ${todasTecnologias}" th:value="${tecnologia.id}" th:text="${tecnologia.nome}" th:attr="data-show-icon=true, data-tick-icon=${tecnologia.icon}">
+							    	
+							    </option>
+							  </select>
+					  	</div>
+					  </div>
+					  
+					  <button type="submit" class="btn btn-primary">Salvar</button>
+	
+				</form>
+			</div> 
+		</div> 
+	</div> 
+</section>
+</html>
