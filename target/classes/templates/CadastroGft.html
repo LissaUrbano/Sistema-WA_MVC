@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+	
+<head><meta charset="UTF-8"/></head>	
+	
+<section layout:fragment="conteudo">
+
+<div class="container-lg">
+		<div th:replace="MensagemGeral"></div>
+		
+		<div class="card shadow-lg mb-4">
+			<div class="card-header py-4">
+				<h5 class="m-0 font-weight-bold text-primary text-center title-panel">Cadastro de unidade GFT</h5>
+			</div>
+			<div class="card-body">
+
+				<form method="POST" action="/wa/gft/cadastrar" th:object="${gft}"> 
+					<input type="hidden" th:field="*{id}"/> 
+					
+					<div th:replace="MensagemErro"></div>
+
+					  <div class="form-row">
+					    <div class="form-group col-md-9" >
+					      <label for="nome">Nome GFT</label>
+							<input type="text" class="form-control" id="nome" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? alert-danger"/>
+					    </div>
+					    <div class="form-group col-md-3">
+					      <label for="cep">CEP</label>
+					      <input type="text" class="form-control" id="cep" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? alert-danger"/>
+					    </div>
+					  </div>					
+					  					
+ 					  <div class="form-row">
+ 					  	<div class="form-group col-md-9">
+					      <label for="endereco">Endereço</label> 
+						  <input type="text" class="form-control" id="endereco" th:field="*{endereco}" th:classappend="${#fields.hasErrors('endereco')} ? alert-danger"/>
+					    </div>
+					     <div class="form-group col-md-3">
+					      <label for="complemento">Complemento</label> 
+						  <input type="text" class="form-control" />
+					    </div>
+					   </div>
+					   
+					   <div class="form-row">
+					    <div class="form-group col-md-5"> 
+					      <label for="bairro">Bairro</label> 
+					      <input type="text" class="form-control"/>
+					    </div>
+					    <div class="form-group col-md-4"> 
+					      <label for="cidade">Cidade</label> 
+					      <input type="text" class="form-control" id="cidade" th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')} ? alert-danger"/>
+					    </div>
+					    <div class="form-group col-md-3">
+					      <label for="estado">Estado</label> 
+						  <input type="text" class="form-control" id="estado" th:field="*{estado}" th:classappend="${#fields.hasErrors('estado')} ? alert-danger"/>
+					    </div>
+					   </div>
+					    
+					   <div class="form-row">
+					    <div class="form-group col-md-3">
+						 <label for="telefone">Telefone:</label>
+							<input type="text" class="form-control" id="telefone" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? alert-danger"/>
+					  	</div>
+					  </div>
+	 
+					  <button type="submit" class="btn btn-primary">Salvar</button>
+	
+				</form>
+			</div> 
+		</div> 
+	</div> 
+</section>
+</html>

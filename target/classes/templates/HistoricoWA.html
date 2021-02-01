@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+	
+<head><meta charset="UTF-8"/></head>	
+	
+<section layout:fragment="conteudo">
+
+	<div class="container-fluid">
+		<div th:replace="MensagemGeral"></div>
+		<div class="card shadow mb-4">
+			<div class="card-header py-4">
+				<h5 class="m-0 font-weight-bold text-primary text-center">Histórico de WA</h5>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<div>	
+						<table class="table table-bordered table-striped " id="id_tabelaHistorico" >
+							<thead class="thead-blue">
+								<tr>
+									<th class="text-center clo-md-2">Nome</th>
+									<th class="text-center clo-md-2">Matrícula</th>
+									<th class="text-center clo-md-2">Cargo</th>
+									<th class="text-center clo-md-1">Inicio WA</th>
+									<th class="text-center clo-md-1">Início Alocação</th>
+									
+									<th class="text-center clo-md-2">Nome Vaga</th>
+									<th class="text-center clo-md-2">Código Vaga</th>
+									<th class="text-center clo-md-1">Projeto</th>
+								</tr>
+							</thead>
+							<tbody>
+				 				<tr th:each="alocacao : ${todasAlocacoes}"> 	
+									<td class="text-left" th:text="${alocacao.funcionarioAlocacao.nome}"></td>
+									<td class="text-left" th:text="${alocacao.funcionarioAlocacao.matricula}"></td>
+ 									<td th:text="${alocacao.funcionarioAlocacao.cargo.descricao}">Starter</td>
+									<td class="text-center" th:text="${{alocacao.funcionarioAlocacao.inicio_wa}}"></td> 	
+									<td class="text-center" th:text="${{alocacao.funcionarioAlocacao.termino_wa}}"></td>						
+									<td class="text-left" th:text="${alocacao.vagaAlocacao.nome}"></td>	
+ 									<td class="text-center" th:text="${alocacao.vagaAlocacao.codigo_vaga}"></td> 	
+									<td class="text-center" th:text="${alocacao.vagaAlocacao.projeto}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div> 
+		
+		<div class="text-center">
+			<a class="btn btn-primary" href="wa/alocar">Alocar</a>
+		</div>
+		
+	</div>
+</section>
+
+</html>

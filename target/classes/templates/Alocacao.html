@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head><meta charset="UTF-8" /></head>
+
+<section layout:fragment="conteudo">
+
+	<div class="container-lg">
+	<div th:replace="MensagemGeral"></div>
+
+	<form method="POST" action="/wa/alocacao" th:object="${alocacaoViewModel}" >
+		<div class="card mb-4">
+		
+			<div class="card-header py-2">
+				<h5 class="m-0 font-weight-bold text-primary text-center">Alocação</h5>
+			</div>
+			<div class="card-body">
+			
+			
+				<div class="row">
+					<div class="col-sm-6 py-3">
+						<label for="funcionario">Selecione Funcionário:</label>
+					      	<select id="funcionario" name="funcionario" class="form-control selectpicker" th:field="*{funcionarioAlocacaoId}" data-live-search="true">
+								<option th:each="funcionario : ${todosFuncionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome}">
+							</select>
+					</div>
+					<div class="col-sm-6 py-3">
+						<label for="vaga">Selecione Nome da vaga</label>
+					      	<select id="vaga" class="form-control selectpicker form-control" th:field="*{vagaAlocacaoId}" data-live-search="true">
+								<option th:each="vaga : ${todasVagas}" th:value="${vaga.id}" th:text="${vaga.nome}">
+							</select>
+					</div>
+				</div>
+			
+			
+				<div class="card-deck">
+					<div class="card" id="cardFuncionarioSelecionado">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary text-center">Funcionário</h6>
+						</div>
+						<div class="card-img text-center py-3">
+							<img src="/images/funcionarioGFT.jpg" class="card-img-top img-funcionario" alt="foto funcionário">
+						</div>
+						<div class="card-body ">
+						
+							<h4><b><span id="nome-funcionario"></span></b></h4>
+							<p>Cargo: <span id="cargo"></p>
+							<div>
+								<ul class="list-group list-group-flush">
+								  <li class="list-group-item">Unidade GFT: <span id="nome-gft"></span></li>
+								  <li class="list-group-item">Matrícula: <span id="matricula"></li>
+								  
+
+								</ul>
+							</div>
+						</div>
+						<div class="card-footer">
+							<a class="btn btn-secondary btn-sm link-panel py-2" href="/wa/funcionarios">Ver Funcionários</a>
+						</div>
+					</div>
+
+					<div class="card" id="cardVagaSelecionada">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary text-center">Projeto</h6>
+						</div>
+						<div class="card-img text-center py-3">
+							<img src="/images/logo-itau.png" class="card-img-top img-cliente"
+								alt="logo projeto">
+						</div>
+						<div class="card-body">
+							<h4><b><span id="nome-vaga"></span></b></h4>
+							<p>Código da vaga:<span id="codigo-vaga"></span></p>
+							<div>
+								<ul class="list-group list-group-flush">
+								  <li class="list-group-item">Projeto: <span id="projeto"></span></li>
+								  <li class="list-group-item">Quantidade de vagas: <span id="qtd-vaga"></span></li>
+								  <li class="list-group-item">Descrição: <span id="descricaoVaga"></span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-footer">
+							<a class="btn btn-secondary btn-sm link-panel py-2" href="/wa/vagas">Ver todas Vagas</a>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			
+			
+			<div class="card-footer text-center">
+				<button type="submit" class="btn btn-outline-success">
+					Alocar em projeto
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					  <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+					</svg>
+				</button>
+			</div>
+		</div>
+		
+	</form>		
+	</div>
+		<script type="text/javascript" th:inline="javascript">
+		
+                   /*<![CDATA[*/
+              
+                   var todosFuncionarios = /*[[${todosFuncionarios}]]*/;
+                   /*]]>*/
+                   
+                   /*<![CDATA[*/
+        
+                   var todasVagas = /*[[${todasVagas}]]*/;
+                   /*]]>*/
+		
+     </script>
+	
+
+</section>
+
+
+</html>
